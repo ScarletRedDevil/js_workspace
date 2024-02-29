@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리</title>
+    <style>
+        #wrapper{
+            width:600px;
+            height:600px;
+            background-color: yellow;
+            margin: auto;
+        }
+        #header{
+            width:s 100%;
+            height:100px;
+            background-color: aqua;
+            text-align: center; /* div 내의 컨텐츠의 가운데 정렬 */
+            line-height: 100px; /* div 내 컨텐츠의 수직 정렬 */
+        }
+        #content{
+            width: 100%;
+            height: 500px;
+            background-color: violet;
+            text-align: center;
+            line-height: 500px;
+        }
+        #content img{ /* content 내의 img 라는 태그에 대해 속성을 가짐*/
+            width: 90%;
+            height: 90%;
+            /* css3부터는 다양한 효과 지원 ~ opacity :0에 가까울수록 투명, 1에 가까울수록 불투명 */
+            opacity:1 ;
+        }
+        
+    </style>
+    <script>
+        let n=1;
+        let opct=1; 
+
+        function next(){
+            n++;
+            console.log("../images/mt/m"+n+".jpg");
+            //문서 내 큰 이미지의 경로를 교체하기
+            let photo=document.getElementById("photo");
+            photo.src="../images/mt/m"+n+".jpg";
+        }
+        function prev(){
+            n--;
+            if(n<1){
+                console.log("첫 사진")
+                n=1;
+            }
+            console.log("../images/mt/m"+n+".jpg");
+            //문서 내 큰 이미지의 경로를 교체하기
+            let photo=document.getElementById("photo");
+            photo.src="../images/mt/m"+n+".jpg";
+        }
+        function alphaPlus(){
+            opct=opct-0.1;
+            if(opct<0){
+                opct=0
+            }
+            let photo=document.getElementById("photo");
+            photo.style.opacity=opct;
+        }
+        function alphaMinus(){
+            opct=opct+0.1;
+            if(opct>1){
+                opct=1
+            }
+            let photo=document.getElementById("photo");
+            photo.style.opacity=opct;
+        }
+        </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <button onclick="prev()">이전</button>
+            <button onclick="alphaPlus()">투명하게</button>
+            <!-- 초기화 버튼 넣어볼까 -->
+            <button onclick="alphaMinus()">불투명하게</button>
+            <button onclick="next()">다음</button>
+        </div>
+        <div id="content">
+            <img src="../images/mt/m1.jpg" id="photo" >
+        </div>
+    </div>
+</body>
+</html>

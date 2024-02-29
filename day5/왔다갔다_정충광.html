@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let pic;
+        let x =1; // 
+        let turn = 1; //1 일때 x값증가, -1일때 x값 감소하게 만듬, 전역으로 선언하여 수동버튼에서 받을수있게함
+        
+        function init(){
+            pic = document.getElementById("pic");
+            pic.style.position="absolute"
+            pic.style.left=0+"px";
+            pic.style.top=150+"px";
+        }
+
+        function move(){
+            // x값을 이동 방향에 따라 증가 또는 감소시킴
+            x += 5 * turn; 
+            pic.style.left = x + "px";
+            
+            // x가 일정 값에 도달하면 이동 방향을 반대로 변경
+            if (x >= 700 || x <= 0) { //치킨이 특정위치 끝에 도달할 때
+                turn = turn * -1; //되돌하가게 함
+            }
+        }
+        function manualMove(){ //버튼누를때 발동하는 함수
+            // if(turn == 1){
+            //     for(i=1;i<=700;i+=5){
+            //         x + = i * turn;
+            //         pic.style.left = x +"px";
+            //     }
+            //     turn = turn *-1; //되돌아가게 함
+            // }else{
+            //     for(j=700;j>=0;j-=5){
+            //         x -= j * turn;
+            //         pic.style.left = x +"px";
+            //     }
+            //     turn = turn * -1;
+            // }
+            turn = turn * -1;
+        }
+        function automove(){
+            setInterval("move()",10);
+        }
+        //과제 : x가 일정 수치에 다다르면 다시 x가 감소되어 img가 왼쪽으로 이동해야 함.
+        addEventListener("load",function(){
+                init();
+           
+                //setInterval("move()",10);
+            }   
+        )
+        
+    </script>
+</head>
+<body>
+    <button id="manual" onclick="manualMove()">수동</button>
+    <button id="auto" onclick="automove()">자동</button>
+    <img src="../images/chicken.png" id="pic">
+</body>
+</html>

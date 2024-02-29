@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        background-color: yellow;
+    }
+</style>
+<script src="../js/lib.js"></script>
+<script>
+    let arr=new Array();
+    arr[0] = "scissors.png"
+    arr[1] = "rock.png"
+    arr[2] = "paper.png"
+
+    function showImg(){
+        document.getElementById("pic");
+        let filename=arr[getRandom(arr.length-1)]
+        pic.src="../images/"+filename
+    }
+    addEventListener("load", function(){
+        let bt=document.querySelector("button");//css 선택자를 이용한 요소 선택
+        //이벤트 종류가 바뀔 수 있으므로 핸들링 안에 로직 길게 작성하지 않고
+        // 추후 유지보수성을 위해 별도의 함수로 빼놓기
+        bt.addEventListener("click", function(){
+            //문서내 pic 이라는 이미지요소의 src경로를 가위,바위,보중 랜덤으로 등장시키게 함
+            showImg();
+        });
+    });
+</script>
+<body>
+    <button>실행</button>
+    <div>
+        <img src="" id="">
+    </div>
+</body>
+</html>

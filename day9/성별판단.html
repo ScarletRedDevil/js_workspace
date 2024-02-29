@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성별판단</title>
+</head>
+<script>
+    addEventListener("load",function(){
+        //document.querySelector("input[name='jumin']");
+        let jumin = document.getElementsByName("jumin")
+        msg = document.getElementById("msg")
+
+        jumin[1].addEventListener("keyup",function(){
+            if(this.value.length>=7){
+                let gender = (this.value.charAt(0)=="1")?"남":"여";
+                msg.innerText = `성별 : ${gender}`
+            }
+
+        })
+    })
+</script>
+<body>
+    <input type="text" name="jumin" placeholder="주민번호 앞자리" maxlength="6">-
+    <input type="text" name="jumin" placeholder="*******" maxlength="7">
+    <p id="msg"></p>
+</body>
+</html>

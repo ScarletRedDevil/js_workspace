@@ -1,0 +1,28 @@
+<script>
+    let box = new Array(4);
+
+    let arr0 = ["4층 1호", "4층 2호", "4층 3호"]
+    let arr1 = ["3층 1호", "3층 2호", "3층 3호"]
+    let arr2 = ["2층 1호", "2층 2호", "2층 3호"]
+    let arr3 = ["1층 1호", "1층 2호", "1층 3호"]
+
+    box[0] = arr0;
+    box[1] = arr1;
+    box[2] = arr2;
+    box[3] = arr3;
+
+    let tag = "<table border=\"1px\">";
+    for (let i=0;i<box.length;i++) {
+
+        tag += "<tr>";
+            for(let j=0; j<box[i].length;j++){
+
+                tag += "<td>"+box[i][j]+"</td>";
+            }
+        tag += "</tr>";
+    }
+    tag += "</table>";
+
+    document.write(tag);
+
+</script>

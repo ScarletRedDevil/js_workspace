@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper{
+        width: 1000px;
+        height: 800px;
+        background-image: url(../images/galaxy/bg.png);
+        margin: auto;
+        position: relative;
+    }
+</style>
+<script src="./GameObject.js"></script>
+<script src="./Hero.js"></script>
+<script src="./Bullet.js"></script>
+<script src="./Enemy.js"></script>
+<script src="./KingEnemy.js"></script>
+<script>
+    let wrapper;
+    let bgY = 0;
+    let hero;
+    let bulletArray=[]; //생성한 총알 넣을 배열
+    let enemyArray=[]; //생성한 총알 넣을 배열
+    let KingArray=[];
+
+    function init(){
+        wrapper = document.getElementById("wrapper")
+    } 
+    function bgEffect(){
+        bgY++;
+        wrapper.style.backgroundPosition=`0px ${bgY}px`;
+    }
+    function createHero(){
+        hero = new Hero(wrapper,"../images/galaxy/ship.png",450,700,50,50,0,0);
+    }
+    function createEnemy(){//잡몹
+        for(let i = 0;i<20;i++){
+            enemy = new Enemy(wrapper,"../images/galaxy/enemy1.png",100+(i*30),200,35,35,0,0)
+        }
+        
+        for(let i=0;i<10;i++){
+            let king = new KingEnemy(wrapper, "../images/galaxy/green_king.png",200+(i*55),140,50,50,0,0,0,2)
+            KingArray.push(KingEnemy)
+        }
+    }
+    function fire(){
+        //총알의 인스턴스 생성하여 움직이게 하므로, 배열에 넣고 반복문 돌려 총알move 호출
+        let bullet = new Bullet(wrapper,"../images/galaxy/bullet.png",hero.x,hero.y,7,17,0,-7);
+        bulletArray.push(bullet);
+    }
+    function gameLoop(){
+        bgEffect();
+        hero.move();
+        for(let i =0;i<bulletArray.length;i++){
+            bulletArray[i].move();
+        }
+    }
+    addEventListener("load",function(){
+        init();
+        createHero();
+        createEnemy();
+        setInterval("gameLoop()",10);
+
+        document.body.addEventListener("keydown", function(e){
+            switch(e.keyCode){
+                case 37 : hero.velX = -5; break;
+                case 39 : hero.velX = 5; break;
+                case 32 : fire(); break;
+                
+            }
+        })
+        document.body.addEventListener("keyup", function(e){
+            switch(e.keyCode){
+                case 37 : hero.velX = 0; break;
+                case 39 : hero.velX = 0; break;
+                
+            }
+        })
+    });
+</script>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>

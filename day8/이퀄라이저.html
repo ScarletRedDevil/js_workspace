@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<script src="./Rect.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+    let wrapper;
+    let count = 10; //막대 갯수
+    let width = 20;//막대 하나당 너비
+    let height = 300;
+    let bgArray = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"]
+    let a = 0.1; //부드러운 움직임 계수
+    let rectArray = [] //모든 막대를 담을 배열
+    let interval=0;
+
+    function createRect() {
+        for (i = 0; i < count; i++) {
+            let bg = bgArray[getRandomInt(bgArray.length - 1)]
+            let targetH = getRandomByRange(1, height);
+            let rect = new Rect(wrapper, bg, i * width, 0, width, height, targetH)
+            rectArray.push(rect);
+
+        }
+    }
+    function init() {
+        wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
+        wrapper.style.margin = "auto";
+        wrapper.style.background = "gray";
+
+        wrapper.style.width = count * width + "px";
+        wrapper.style.height = height + "px";
+
+        document.body.appendChild(wrapper);
+
+    }
+    function gameLoop() {
+        //모든 막대를 대상으로 move() 호출
+        for (i = 0; i < rectArray.length; i++) {
+            rectArray[i].move();
+        }
+        interval++;
+        console.log(interval);
+        if(interval%20==0){
+            //막대들 중 랜덤으로 하나 선택해 막대의 target H 를 랜덤높이 부여
+            rectArray[getRandomInt(rectArray.length-1)].targetH = getRandomByRange(1,height);
+        }
+    }
+
+    addEventListener("load", function () {
+        init();
+        createRect();
+
+        //애니메이션 재생을 위한 루프 생성
+        setInterval("gameLoop()", 10);
+    })
+</script>
+
+<body>
+
+</body>
+
+</html>

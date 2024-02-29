@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+    let j = prompt("원하는 층 입력")
+    let m = prompt("원하는 호수 입력 ")
+    let b = parseInt(prompt("건물 두께 입력"))
+    //document.write(" 가나다 \"뭐함\" ")
+    
+    let tag="<table border=\"1px\">";
+    for(i=j;i>=1;i--){//층수 결정, 아래부터 올라가므로 반대로
+        tag= tag+"<tr>";
+        for(n = 1; n<=m;n++){// 호수 결정 
+            tag = tag + "<td>"+i+"층"+n+"호</td>"
+        }
+        
+        //tag= tag + "<td>"+i+"층 1호</td>"
+        //tag= tag + "<td>"+i+"층 2호</td>"
+        tag= tag+"</tr>";
+    }
+    tag= tag+"</table>";
+        
+        
+    document.write(tag);
+
+</script>
+<body>
+    
+</body>
+</html>

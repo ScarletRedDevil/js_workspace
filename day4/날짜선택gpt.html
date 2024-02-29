@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Selector</title>
+</head>
+<body>
+    <select id="yearSelect"></select>
+    <select id="monthSelect"></select>
+    <select id="daySelect"></select>
+
+    <script>
+        const yearSelect = document.getElementById("yearSelect");
+        const monthSelect = document.getElementById("monthSelect");
+        const daySelect = document.getElementById("daySelect");
+
+        // 연도 옵션 생성
+        for (let year = 1945; year <= 2024; year++) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+
+        // 월 옵션 생성
+        for (let month = 1; month <= 12; month++) {
+            const option = document.createElement("option");
+            option.value = month;
+            option.textContent = month;
+            monthSelect.appendChild(option);
+        }
+
+        // 월이 변경될 때마다 일 옵션 업데이트
+        monthSelect.addEventListener("change", updateDays);
+
+        // 연도와 월에 따라 일 옵션 업데이트
+        function updateDays() {
+            const selectedYear = parseInt(yearSelect.value);
+            const selectedMonth = parseInt(monthSelect.value);
+            let daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+
+            // 윤년 확인
+            if (selectedMonth === 2 && ((selectedYear % 4 === 0 && selectedYear % 100 !== 0) || selectedYear % 400 === 0)) {
+                daysInMonth = 29;
+            }
+
+            // 일 옵션 초기화
+            daySelect.innerHTML = "";
+
+            // 일 옵션 생성
+            for (let day = 1; day <= daysInMonth; day++) {
+                const option = document.createElement("option");
+                option.value = day;
+                option.textContent = day;
+                daySelect.appendChild(option);
+            }
+        }
+
+        // 초기에 일 옵션 설정
+        updateDays();
+    </script>
+</body>
+</html>

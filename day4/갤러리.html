@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper{
+        width: 600px;
+        height: 500px;
+        background-color: aquamarine;
+        margin: auto;
+    }
+    #aside{
+        width: 100px;
+        height: 100%;
+        background-color: bisque;
+        float: left;
+        text-align: center;
+        overflow: scroll;
+    }
+    #aside img{
+        width: 90px;
+        height: 90px;
+    }
+    #content{
+        width: 500px;
+        height: 100%;
+        background-color: violet;
+        float: left;
+    }
+    #content img{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script>
+    //rollOver(파일이름)
+    
+    function rollOver(filename){
+        //id를 부여하지 않고 css 선택자를 이용해 이미지 접근
+        let pic = document.querySelector("#content img");
+        pic.src="../images/mt/"+filename;
+    }
+</script>
+<body>
+    <div id="wrapper">
+        <div id="aside">
+            <img src="../images/mt/m1.jpg"onclick="rollOver('m1.jpg')">
+            <img src="../images/mt/m2.jpg"onclick="rollOver('m2.jpg')">
+            <img src="../images/mt/m3.jpg"onclick="rollOver('m3.jpg')">
+            <img src="../images/mt/m4.jpg"onclick="rollOver('m4.jpg')">
+            <img src="../images/mt/m5.jpg"onclick="rollOver('m5.jpg')">
+            <img src="../images/mt/m6.jpg"onclick="rollOver('m6.jpg')">
+            <img src="../images/mt/m7.jpg"onclick="rollOver('m7.jpg')">
+            <img src="../images/mt/m8.jpg"onclick="rollOver('m8.jpg')">
+            <img src="../images/mt/m9.jpg"onclick="rollOver('m9.jpg')">
+        </div>
+        <div id="content">
+            <img src="../images/mt/m1.jpg">
+        </div>
+    </div>"
+</body>
+</html>

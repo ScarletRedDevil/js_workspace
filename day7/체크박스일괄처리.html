@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체크박스 일괄처리</title>
+</head>
+<script>
+    let flag = false;
+    addEventListener("load",function(){
+        //전체선택 박스에 클릭이벤트 연결
+        document.getElementById("king");
+        king.addEventListener("click",function(){
+            //문서 내 ch라는 배열명을 갖는 모든 체크박스 대상으로하는 for문
+            let ch = document.getElementsByName("ch")
+            
+            for(let i = 0;i<ch.length;i++){
+                ch[i].checked = this.checked;
+            }
+        })
+    })
+</script>
+<body>
+    <button id="bt" onclick="this.style.backgroundColor='yellow'">왕버튼</button>
+
+    <input type="checkbox" id = "king"> 전체선택
+    <p></p>
+    <!-- 브라우저 실행 시 html 태그가 메모리에 올라올 때, 만약 name 이 동일하게 부여되어 있다면
+    해당 이름으로 배열이 생성됨 -->
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+    <input type="checkbox" name="ch"> 고객님 안녕하세요 <br>
+</body>
+</html>
+
+<!-- 전체 누르고 개별을 눌러 전체는 체크를 해제시키고 나머지 체크박스를 체크하는 식으로 구현가능? -->

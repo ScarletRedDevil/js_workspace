@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper {
+        margin: auto;
+        background-color: yellow;
+        position: relative;
+    }
+</style>
+<script>
+    // 맵을 표현할 이차원 배열 정의
+    let map = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 4, 4, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+    ];
+
+
+    let wrapper;
+
+    //각종 아이템을 생성하는 함수 선언
+    function createItem(filename, y, x) {
+        console.log("mario cordinate x:", x, "y: ", y);
+
+        let brick = document.createElement("img"); //<img> 태그 사용과 동일 효과
+        brick.src = "../images/mario/" + filename; //<img src = "">
+
+        brick.style.position = "absolute"
+        brick.style.left = x * 50 + "px";
+        brick.style.top = y * 50 + "px";
+
+        brick.style.width = 50 + "px";
+        brick.style.height = 50 + "px";
+
+        wrapper.appendChild(brick)
+    }
+
+    function createMap() { //캐릭터가 밟을 벽돌 생성
+        for (let a = 0; a < map.length; a++) {
+            for (let i = 0; i < map[a].length; i++) {
+                switch (map[a][i]) {
+                    case 1: createItem("mario.png", a, i); break; //a는 층수, i는 호수
+                    case 2: createItem("brick.png", a, i); break; //a는 층수, i는 호수
+                    case 3: createItem("qbrick.png", a, i); break; //a는 층수, i는 호수
+                    case 4: createItem("coin.png", a, i); break; //a는 층수, i는 호수
+                    //case 5: createItem("flower.webp", a, i); break; //a는 층수, i는 호수
+                }
+
+            }
+        }
+    }
+
+    function init() {
+        wrapper = document.getElementById("wrapper");
+        wrapper.style.width = map[0].length * 50 + "px"
+        wrapper.style.height = map.length * 50 + "px"
+
+        createMap();
+    }
+    addEventListener("load", function () {
+        init();
+    })
+</script>
+
+<body>
+    <div id="wrapper"></div>
+</body>
+
+</html>

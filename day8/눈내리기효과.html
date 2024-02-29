@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper {
+        width: 1000px;
+        height: 800px;
+        background-image: url(../images/winter.jpg);
+        background-size: 1000px 800px;
+        margin: auto;
+    }
+</style>
+<script src="../js/lib.js"></script>
+<script src="./Snow.js"></script>
+<script>
+
+    let wrapper;
+    let snowArray = [];
+    let count = 0;
+    let flag = true;
+
+    function createSnow() {
+        //constructor(container, x, y, width, height, velX, velY, blur)
+        //눈의 위치 속도등은 랜덤이므로 x, y, width, height, velx, velY 모두 랜덤이어야함)
+        let x = getRandomByRange(-50, 800);
+        let y = getRandomByRange(-100, 0);
+        let width = getRandomByRange(3, 9);
+        let height = getRandomByRange(3, 9);
+        let velX = getRandomByRange(-1, 2);
+        let velY = getRandomByRange(1, 2);
+        let blur = getRandomByRange(2, 4);
+
+        let snow = new Snow(wrapper, x, y, width, height, velX, velY, blur);
+        // 컨테이너에서 받을 매개변수를 createSnow() 내에서 정의하여 snow에 집어넣음 
+        //그게전부랜덤
+        snowArray.push(snow);
+    }
+    function gameLoop() {
+        if (flag) {
+
+            count++;
+            if (count % 20 == 0) {
+                createSnow();
+            }
+            for (let i = 0; i < snowArray.length; i++) {
+                snowArray[i].move();
+            }
+        }
+    }
+
+    addEventListener("load", function () {
+        wrapper = document.getElementById("wrapper");
+
+        setInterval("gameLoop()", 30);
+
+        //키보드 이벤트 연결 
+        document.body.addEventListener("keydown", function (e) {
+            console.log(e.keyCode);
+
+            if (e.keyCode == 27) {
+                flag = !flag;
+            }
+        });
+    });
+</script>
+
+<body>
+    <div id="wrapper"></div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<script>
+    // JSON이란 JS Object Notation 의 약자이다.
+    // 즉, 데이터를 표현할 때 모든 개발자가 이해하고 있는 자바스크립트의 객체 형식을 
+    // 빌려 표현하는 문자열임(프로그래밍 언어가 아님)
+    // 형식 : {key : value}, 
+    // value 안에는 문자, 숫자, 논리값, 객체형(class로부터 생성된 인스턴스, 배열, string 등 객체 전체)
+    let str = "{"
+    str += " \"name\" : \"강아지\",";
+    str += "\"age\" : 9,";
+    str += "\"hybrid\" : false,";
+    str += "\"food\" : [\"고기\", \"간식\", \"물\"]"
+    str += "}"
+
+    // json 다뤄보기
+    // 문자열로 위 데이터를 처리해도 되지만, 너무 복잡해짐 
+    //string 객체의 매서드를 활용하여도 효율성이 떨어짐.
+    //json 문자열은 개체처럼 다루는게 효율적
+    // 따라서 js 내장객체중 json문자열을 해석해주는 parsing()객체가 지원됨(내장객체임)
+    //json.parse("객체로 해석하고 싶은 json 문자열") -> json 문자열을 객체로 변환
+ 
+let obj = JSON.parse(str); // 문자열이었던 str가 js의 객체로 변환됨. 
+console.log(str)
+</script>

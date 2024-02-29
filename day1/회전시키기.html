@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-top: 100px;
+            margin-left: 200px;
+        }
+    </style>
+    <script>
+        let cnt=30;
+        
+        function rotate(){
+            cnt=cnt+30;
+            let box=document.getElementById("box");
+            box.style.transform="rotate("+cnt+"deg)";
+            console.log("현재 각도는"+cnt);
+           
+        }
+    </script>
+</head>
+<body>
+    <button onclick="rotate()">회전시키기</button>
+
+    <div id="box"></div>
+</body>
+</html>

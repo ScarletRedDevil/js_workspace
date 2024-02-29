@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 800px;
+            height: 800px;
+            margin: auto;
+            background-color: bisque;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        let box;
+        let a = 0.1
+        let targetX
+
+        function createRect(){
+            box=document.createElement("div");
+            box.style.width=200+"px";
+            box.style.height=120+"px";
+            box.style.background="red"
+            box.style.borderRadius=5+"%"
+            box.style.position="absolute";
+            box.style.left=-170+"px";
+            box.style.top=100+"px"
+
+            //box 라는 div에 이벤트 연결하기
+            box.addEventListener("mouseover", function(){
+                console.log("마우스 오버")
+                targetX=0
+            });
+            box.addEventListener("mouseout", function(){
+                console.log("마우스 아웃")
+                targetX=-170
+
+            });
+
+            //wrapper에 부착
+            let wrapper = document.getElementById("wrapper");
+            wrapper.appendChild(box);
+
+        }
+
+        //박스 움직임에 감속도 공식을 적용하기
+        function move(){
+            box.style.left = parseInt(box.style.left)+a*(targetX - parseInt(box.style.left))+"px"
+        }
+
+        function init(){
+            //책갈피 생성하여 적당한 위치에 부착
+            createRect();
+        }
+        addEventListener("load", function(){
+            init();
+            setInterval("move()",25)
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>

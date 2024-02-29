@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let pic;
+        let x = 1; // 
+        let turn = 1; //1 일때 x값증가, -1일때 x값 감소하게 만듬, 전역으로 선언하여 수동버튼에서 받을수있게함
+        let st; //자동 함수인 setInterval을 가리키기 위한 변수 
+
+        function init() {
+            pic = document.getElementById("pic");
+            pic.style.position = "absolute"
+            pic.style.left = 0 + "px";
+            pic.style.top = 150 + "px";
+        }
+
+        function move() {
+            // x값을 이동 방향에 따라 증가 또는 감소시킴
+            x += 5 * turn;
+            pic.style.left = x + "px";
+
+            // x가 일정 값에 도달하면 이동 방향을 반대로 변경
+            if (x >= 700 || x <= 0) { //치킨이 특정위치 끝에 도달할 때
+                turn = turn * -1; //되돌하가게 함
+            }
+        }
+
+        function manualMove() { //버튼누를때 발동하는 함수
+            if(st !=undefined){//진행중인 셋타임 아웃이 있다면
+                clearInterval(st); // 멈춘다
+            }
+            move();
+        }
+
+        //자동 버튼을 누르면, setInterval을 하나 생성하여 움직입니다
+        function autoMove() {
+            st = setInterval("move()",10);
+        }
+
+        //과제 : x가 일정 수치에 다다르면 다시 x가 감소되어 img가 왼쪽으로 이동해야 함.
+        addEventListener("load", function () {
+            init();
+        });
+
+    </script>
+</head>
+
+<body>
+    <button id="manual" onClick="manualMove()">수동</button>
+    <button id="auto" onClick="autoMove()">자동</button>
+    <img src="./images/chicken.webp" id="pic">
+</body>
+
+</html>

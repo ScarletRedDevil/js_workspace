@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 1500px;
+            height: 900px;
+            background-color: rgb(181,214, 146);
+        }
+        body{
+            margin : 0px;
+        }
+        #dish{
+            position: absolute; 
+            left:1000px;
+            width: 370px;
+            height: 400px;
+            top: 300px;
+            
+        }
+    </style>
+    <script>
+        let flag
+        function init(){
+
+            food = document.getElementById("food");
+            food.style.position="absolute";
+            food.style.left=300+"px"
+        }
+        // 사용자가 마우스를 움직이는 동안 마우스의 좌표 구하기
+        function getMouseXY(){
+            console.log("마우스 움직이는 중");
+            // 마우스 좌표 정보 획득을 위해 시스템의 이벤트 정보를 얻어야 하는데,
+            // js에서 사용자가 이벤트를 일으킬 때 마다 메모리에 event 객체가 올라감
+            // 따라서 이 event 객체를 이용해 정보 획득
+            let x= event.clientX; //x축 (left값)
+            let y= event.clientY; //y축 (top값)
+            console.log("x축"+x+", y축"+y);
+
+            if(flag){ 
+                food = document.getElementById("food");
+                food.style.left=x-250+"px";
+                food.style.top=y-250+"px";
+            }
+            
+        }
+        function effect(){
+            flag = !flag;
+
+            if(flag==1){
+                food.style.border="2px solid red"
+            }else{
+                food.style.border="0px"
+            }
+        }
+    </script>
+</head>
+<body onload="init()" onmousemove="getMouseXY()">
+    <div id="wrapper">
+        <img src="../images/dish.png" id="dish">
+        <img src="../images/chicken.png" id="food" onClick="effect()">
+
+    </div>
+</body>
+</html>

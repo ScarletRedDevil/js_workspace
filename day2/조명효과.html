@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 700px;
+            height: 600px;
+            background-color: aqua;
+            margin: auto;
+        }
+        #aside{
+            width: 100px;
+            height: 100%;
+            background-color: bisque;
+            float: left;
+        }
+        #content{   
+            width: 600px;
+            height: 600px;
+            background-image: url(../images/room/room.webp);
+            background-size: 600px 600px;
+            float: left;
+        }
+        #light{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        let flag = false;
+
+        //스위치를 전환하며 on.png / off.png 교체
+        function control(){
+            let bt = document.getElementById("bt");
+            let result = (flag)? "on.png":"off.png" ;
+            bt.src="../images/room/"+result;
+            flag =! flag;
+
+            //스위치 버튼에 맞는 조명처리 , sytle 의 opacity 변경하기
+            let light = document.getElementById("light");
+            let op = (flag)? 0 : 0.8;
+            light.style.opacity=op;
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="aside"> 
+            <img src="../images/room/off.png" id="bt" onclick="control()">
+        </div>
+        <div id="content">
+            <div id="light">불껐을 때 암흑처리</div>
+        </div>
+    </div>
+</body>
+</html>

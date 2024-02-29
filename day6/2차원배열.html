@@ -1,0 +1,19 @@
+<script>
+
+    let box = new Array(3); // 3층 배열 선언 (아직 1차원임)
+    let fruit=["사과", "딸기", "포도", "바나나"];
+
+    let car=["Benz", "Audi", "BMW", "Kia"];
+
+    let subject=["MongoDB","Spring","Komoran","Cloud"];
+
+    box[0] = fruit;
+    box[1] = car;
+    box[2] = subject
+
+    for(let i=0;i<box.length;i++){
+        for(let j=0; j<box[i].length;j++){
+            console.log(box[i][j])
+        }
+    }
+</script>

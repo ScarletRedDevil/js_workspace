@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            background-image: url(../images/plane/game_bg.jpg);
+            width: 1280px;
+            height:640px;
+            margin: auto;
+            position: relative;
+        }
+        #plane{
+            width: 60px;
+            position: absolute;
+            left: 200px;
+            top: 150px;
+        }
+        
+    </style>
+    <script>
+        let x=200; //최초 x좌표값 선언
+        let y=150; //최초 y좌표값 선언
+        function r_move(){
+            x=x+20;
+            let plane=document.getElementById("plane");
+            plane.style.left=x+"px";
+            console.log("x값 : "+x)
+        }
+        function d_move(){
+            y=y+20;
+            let plane=document.getElementById("plane");
+            plane.style.top=y+"px";
+            console.log("y값 : "+y)
+        }
+        function current(){
+            console.log("x값 : "+x+", y값 : "+y)
+        }
+        function l_move(){
+            x=x-20;
+            let plane=document.getElementById("plane");
+            plane.style.left=x+"px";
+            console.log("x값 : "+x)
+        }
+        function u_move(){
+            y=y-20;
+            let plane=document.getElementById("plane");
+            plane.style.top=y+"px";
+            console.log("y값 : "+y)
+        }
+        function current(){
+            console.log("x값 : "+x+", y값 : "+y)
+        }
+    </script>
+</head>
+<body>
+
+    <!-- 게임 스테이지 배경 역할의 div 생성 -->
+    <div id="wrapper">
+        <table>
+            <tr>
+                <td></td>
+                <td><button onclick="u_move()">up</button></td>
+                <td><button onclick="current()">좌표</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="l_move()">left</button></td>
+                <td><button onclick="d_move()">down</button></td>
+                <td><button onclick="r_move()">right</button></td>
+            </tr>
+        </table>
+        <img src="../images/plane/plane.png" id="plane">
+    </div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력</title>
+    <style>
+        #wrapper{
+            width: 700px;
+            height: 720px;
+            background-color: yellow;
+            margin: auto;
+        }
+        #header{
+            width: 100%;
+            height: 70px;
+            background-color: aqua;
+            line-height: 70px;
+            text-align: center;
+        }
+        #header span{
+            font-size: 35px;
+            font-weight: bold;
+            margin: 0px 30px;
+            box-sizing: border-box;
+        }
+        #header button{
+            width: 50px;
+            height: 30px;
+        }
+        #dayTitle{
+            width: 100%;
+            height: 50px;
+            background-color: bisque;
+            position: relative;
+        }
+        #content{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<script src="./Cell.js"></script>
+<script>
+
+    let wrapper;
+    let dayTitle;//요일들어갈 div
+    let content;
+    let cellSize=100;//셀크기, 이걸로 달력전체크기결정
+    let currentDate;
+
+    let dayTitleArray=["sun","mon","tue","wed","thu","fri","sat"]
+    let cellArray=[]
+
+    function createDayCell(){
+        for(let i =0;i<dayTitleArray.length;i++){
+            let cell = new Cell(dayTitle,i*cellSize,0,cellSize,50,dayTitleArray[i]);
+            cell.div.style.lineHeight=50+"px"
+            cell.div.style.textAlign="center"
+        }
+    }
+    function createNumCell(){
+        for(let i=0;i<6;i++){
+            let arr=[];
+            for(let j=0;j<dayTitleArray.length;j++){
+                let cell = new Cell(content,j*cellSize,i*cellSize,cellSize,cellSize,"x")
+                arr.push(cell);
+            }
+            cellArray.push(arr);//층수만큼 일차원배열 arr 넣기
+        }
+    }
+    //달력 제목을 출력하는 함수
+    function printTitle(){
+        let span = document.querySelector("#header span")
+        let yy=currentDate.getFullYear();//현재연도
+        let mm=currentDate.getMonth();//현재월(0부터시작)
+        let m1 = mm+1;
+        let str = (m1<10)? "0"+m1 : m1;
+        span.innerText=`${yy}년 ${str}월`;
+    }
+    //이차원배열의 각 셀에 날짜 출력하기
+    function printNum(){
+        let order=0; //무슨요일부터 날짜출력할지 결정짓는 순서목적
+        let num=0; //날짜출력을 위한 변수
+        for(let i=0;i<cellArray.length;i++){
+            for(let j=0;j<cellArray[i].length;j++){
+                if(order>=getStartDayOfWeek() && num<getLastDateOfMonth()){
+                    num++;
+                    if(num==getCurrentDayOfMonth()){
+                        cellArray[i][j].setContent(num);
+                    }else{
+                        cellArray[i][j].setContent(num);
+                    }
+                    
+                }else{
+                    cellArray[i][j].setContent("");
+                }
+                order++
+            }
+        }
+    }
+    //해당월이 무슨요일부터 시작하는지 알려주는 함수
+    function getStartDayOfWeek(){
+        let d = new Date();
+        let yy=currentDate.getFullYear();
+        let mm=currentDate.getMonth();
+
+        d.setFullYear(yy)
+        d.setMonth(mm);
+        d.setDate(1); //해당월의 시작요일을 구하기 위해 1로 기본세팅
+        return d.getDay(); //해당월의 시작요일 구했음 
+    }
+    function getCurrentDayOfMonth(){
+        let d = new Date();
+        return d.getDate()
+    }
+
+    function getLastDateOfMonth(){
+        let d = new Date();
+        //사용자가 현재 보고있는 날짜 객체에서 연도 가져오기
+        d.setFullYear(currentDate.getFullYear());
+        d.setMonth(currentDate.getMonth()+1)//다음달로조작
+        d.setDate(0)//다시 이전달로 넘어오면서 날짜는 마지막날
+        return d.getDate(); //해당월의 마지막날 구햇음
+    }
+
+    function init(){
+        wrapper.style.width = cellSize * 7+"px";
+        wrapper.style.height = cellSize * 6+(70+50)+"px";
+
+        content.style.height=cellSize *6+"px";
+    }
+    addEventListener("load",function(){
+        wrapper = document.getElementById("wrapper")
+        dayTitle = document.getElementById("dayTitle")
+        content = document.getElementById("content")
+        init();
+        
+        createDayCell();
+        createNumCell();
+        
+        currentDate = new Date();
+        printTitle();
+        printNum();
+
+        let btn = document.getElementsByName("btn");
+        btn[0].addEventListener("click",function(){
+            currentDate.setMonth(currentDate.getMonth()-1)
+            printNum();
+            printTitle();
+        })
+        btn[1].addEventListener("click",function(){
+            currentDate.setMonth(currentDate.getMonth()+1)
+            printTitle(); //표시제목변경
+            printNum();//날짜 다시출력
+        })
+    });
+</script>
+<body bgcolor="black">
+    <div id="wrapper">
+        <div id="header">
+            <button name="btn">◀</button>
+            <span></span>
+            <button name="btn">▶</button>
+        </div>
+        <div id="dayTitle"></div>
+        <div id="content"></div>
+    </div>
+</body>
+</html>

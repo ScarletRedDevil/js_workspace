@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0px;
+        }
+        #wrapper{
+            width: 1000px;
+            height: 900px;
+            background-image: url(../images/mt/m1.jpg);
+            background-size: 1000px 900px;
+            position: relative;
+        }
+    </style>
+    <script src="../js/lib.js"></script>
+    <script>
+        
+        let targetX=100;
+        let targetY=200;
+        let a = 0.1;
+        let firefly;
+        let count=0;
+
+        function move(){
+            count++;
+            if(count%400==0){
+                //console.log(count);
+                targetX=getRandom(700);
+                targetY=getRandom(900);
+            }
+            
+            firefly.style.left = parseInt(firefly.style.left)+a*(targetX-parseInt(firefly.style.left))+"px";
+            firefly.style.top = parseInt(firefly.style.top)+a*(targetY-parseInt(firefly.style.top))+"px";
+        }
+        function init(){
+            //반딧불 이미지를 원하는 위치에 초기생성
+            firefly = document.createElement("img");
+            firefly.src="../images/firefly.jpg"
+            firefly.style.width=100+"px"
+            firefly.style.position="absolute"
+            firefly.style.left=0+"px"
+            firefly.style.top=0+"px"
+
+            let wrapper = document.getElementById("wrapper")
+            wrapper.appendChild(firefly)
+        }
+        addEventListener("load", function(){
+            init();
+            document.body.addEventListener("mousedown",function(){
+                // console.log(event);
+                targetX=event.clientX;
+                targetY=event.clientY;
+
+            });
+            setInterval("move()",10);
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>

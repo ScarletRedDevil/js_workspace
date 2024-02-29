@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 700px;
+            height: 300px;
+            background-color: yellow;
+            margin: auto;
+            border-radius: 3%;
+        }
+        #content{
+            font-size: 40px;
+            text-align: center;
+            height: 200px;
+            background-color: green;
+            line-height: 200px;
+        }
+        .box{
+            width: 130px;
+            height: 130px;
+            font-size: 50px;
+        }
+        #footer button{
+            width:100px;
+            height:50px;
+        }
+    </style>
+    <script>
+        //아래 변수들은 프로그램 종료시까지 제어하기 위해 전역으로 선언됨
+        let hh;
+        let mm;
+        let ss;
+        let sc=0;
+        let mc=0;
+        let hc=0;
+        let flag=false;
+
+        function setCount(){
+            if(flag){
+                sc++;
+                ss.value=sc;
+
+                if(sc==60){
+                    sc = 0;
+                    ss.value=sc;
+                    mc++;
+                    mm.value=mc;
+                }
+                if(mc==60){
+                    mc=0;
+                    mm.value=mc;
+                    hc++;
+                    hh.value=hc;
+                }
+            }
+        }
+        function init(){
+            hh = document.getElementById("hh");
+            mm = document.getElementById("mm");
+            ss = document.getElementById("ss");
+            
+            
+            hh.value=0;
+            mm.value=0;
+            ss.value=0;
+        }
+        
+        setInterval("setCount()",1000);
+
+    </script>
+</head>
+<body onload="init()">
+    <div id="wrapper">
+        <div id="content">
+            <input type="text" class="box" id="hh" value="00">시
+            <input type="text" class="box" id="mm" value="00">분
+            <input type="text" class="box" id="ss" value="00">초
+        </div>
+        <div id="footer">컨트롤러
+            <button onclick="flag=true;">start</button>
+            <button onclick="flag=false;">stop</button>
+            <button onclick="setCount()">수동</button>
+        </div>
+    </div>
+</body>
+</html>

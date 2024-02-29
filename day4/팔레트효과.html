@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper{
+        width: 700px;
+        height: 600px;
+    }
+    #header div{
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+    #content{
+        width: 100%;
+        height: 400px;
+        background-color: black;
+        /* 다른 block 요소가 float될 때 그 영향을 받지 않음 */
+        clear:both 
+    }
+</style>
+<script>
+    function rollOver(bg){
+        console.log(bg)
+        let content = document.getElementById("content")
+        content.style.backgroundColor=bg
+    }
+</script>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div onmouseover="rollOver('red')" style="background-color: red;"></div>
+            <div onmouseover="rollOver('orange')" style="background-color: orange;"></div>
+            <div onmouseover="rollOver('yellow')"style="background-color: yellow;"></div>
+            <div onmouseover="rollOver('green')"style="background-color: green;"></div>
+            <div onmouseover="rollOver('blue')"style="background-color: blue;"></div>
+            <div onmouseover="rollOver('navy')"style="background-color: navy;"></div>
+            <div onmouseover="rollOver('purple')"style="background-color: purple;"></div>
+        </div>
+        <div id="content"></div>
+    </div>
+</body>
+</html>

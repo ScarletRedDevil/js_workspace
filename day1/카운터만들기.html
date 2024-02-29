@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let cnt=0; //전역변수, 프로그램 종료시까지 잔존 즉, 브라우저 종료시까지 값 유지 
+
+        //아래 코드를 무조건 실행이 아닌, 일정 조건에서 실행되게 하려면 영역 지정 후 
+        //언제든 부를 수 있게 이름 부여하기
+        //function test(){ // 이 영역에 test라는 이름의 함수 정의됨
+            //alert("js실행");
+        //}
+
+        function test(){
+            console.log("카운트 값은"+cnt);
+            cnt++
+        }
+
+        //카운터를 콘솔에 출력하여 버튼을 누를때마다 1, 2, 3, 4... 등으로 출력하게 하기
+        
+    </script>
+</head>
+<body>
+    <button onclick=test()>카운터 증가</button>
+</body>
+</html>

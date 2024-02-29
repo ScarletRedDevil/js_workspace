@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살날리기</title>
+</head>
+<style>
+    span {
+        font-size: 30px;
+    }
+</style>
+<script src="../js/lib.js"></script>
+<script>
+    
+    let span;
+    let x = 0; //좌표 
+    let velX = 7; //속도
+    let arrows = [];
+    let velocity = []
+    let arrowColor = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"];
+
+    //화살만들기
+    function createArrow() {
+        for (let i = 0; i < 5; i++) {
+
+            span = document.createElement("span"); //<span></span>  inline
+            span.innerText = "→"; //이미지가 아닌 텍스트 즉 특수 문자임  
+            span.style.color = getRndmColor(); //폰트 색상을 무작위러
+            span.style.position = "absolute";
+            span.style.top = (getRandomFloat(10) * i * 10) + "px";
+            span.style.left = 0 + "px";
+            arrows.push(span); // 화살 배열에 추가
+            velocity.push(getRandomFloat(7)); // 화살 속도 배열에 추가
+            document.body.appendChild(span);
+        }
+    }
+    // 무작위 색상 만들기
+    function getRndmColor() {
+        let colorIndex = getRandomInt(7)
+        return arrowColor[colorIndex];
+    }
+
+    //화살날리기
+    function move() {
+        for (let i = 0; i < arrows.length; i++) {
+            let nowX = parseInt(arrows[i].style.left) || 0;
+            let nowVelX = velocity[i];
+            nowX += nowVelX;
+            // 화살이 일정위치 도착시 첨부터 시작 
+            if (nowX >= 1000) {
+                nowX = 0;
+            }
+            arrows[i].style.left = nowX + "px";
+        }
+    }
+
+    function init() {
+        createArrow();
+        setInterval("move()", 10);
+    }
+</script>
+
+<body onLoad="init()">
+</body>
+
+</html>
+<!-- 프로그램 가동하자마자 화살이 날아가기 시작함 
+동시에 5개정도
+근데 화살마다 높이 속도 색상이 전부 다름 -->

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 500px;
+            height: 500px;
+            background-color: #ccc;
+        }
+    </style>
+    <script>
+        let flag=true;
+
+        function setBg(){
+            let wrapper = document.getElementById("wrapper");
+            let bg=(flag)?"red":"yellow";
+            wrapper.style.backgroundColor=bg;
+            flag=!flag;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="setBg()">배경뒤집기</button>
+    <div id="wrapper"></div>
+</body>
+</html>
